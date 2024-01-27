@@ -1,0 +1,150 @@
+.TableStyled {
+    width: 100%;
+    /* font-weight: normal !important; */
+}
+
+.menuTable {
+    width: auto;
+    display: none;
+}
+
+
+/* BORDER TABLA */
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child>*:first-child {
+    border-radius: 8px 0px 0px 0px !important;
+}
+
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child>*:last-child {
+    border-radius: 0px 8px 0px 0px !important;
+}
+
+.ant-table-thead th {
+    padding-right: 0px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    line-height: normal !important;
+    letter-spacing: 1px !important;
+    
+    /* text-align: center !important; */
+}
+
+
+/* PADDING TABLA */
+.ant-table-tbody .ant-table-row {
+    text-align: left;
+    color: #6E6B7B;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ant-table-thead th {
+    padding: 6px 10px !important;
+}
+
+.ant-table-cell {
+    padding: 18.5px 14px !important;
+}
+
+.ant-table-thead .ant-table-selection-column,
+.ant-table-selection-column {
+    /* padding: 1px !important; */
+    text-align: right !important;
+    padding-inline-end: 0px !important;
+    padding-inline-start: 0px !important;
+}
+
+
+
+.ant-table-tbody td div {
+    display: flex;
+}
+
+.TableBoxShadow .ant-table-container {
+    box-shadow: 0px 3px 3px -4px rgba(0, 0, 0, 0.75);
+
+}
+
+
+.table-start {
+    display: flex;
+    align-items: top;
+    justify-content: start !important;
+    width: 100%;
+}
+
+/* 
+.ant-table-tbody tr {
+    padding: 50px !important;
+} */
+
+
+/* PAGINACION */
+.ant-pagination .ant-pagination-item {
+    border: transparent !important;
+
+}
+
+.ant-pagination .ant-pagination-item a {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+}
+
+.ant-pagination-item-link {
+    font-weight: 700 !important;
+    font-size: 14px !important;
+
+}
+
+.ant-pagination .ant-pagination-item-active {
+    background-color: transparent !important;
+
+}
+
+.ant-pagination .ant-pagination-item-active a {
+    color: var(--priv-primary) !important;
+    font-weight: 700;
+}
+
+.ant-empty-normal{
+    display: flex;
+    justify-content: center
+}
+
+.ant-pagination-prev {
+    margin-right: 25px !important;
+    font-size: 50px !important;
+}
+
+.ant-pagination-next {
+    margin-left: 25px !important;
+}
+
+.ant-pagination-next span,
+.ant-pagination-prev span {
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .ant-table-pagination {
+        margin: 0px;
+        padding: 5px;
+    }
+
+    .menuTable {
+        display: block;
+        /* background-color: #fff; */
+    }
+
+    .menuTable p {
+        background-color: #eaeaea;
+        height: 40px;
+
+    }
+
+    .ant-table-pagination-left {
+        justify-content: center !important;
+    }
+
+
+}

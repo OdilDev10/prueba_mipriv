@@ -1,0 +1,85 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+  }
+  
+  .cardPlans {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0c1e29;
+  }
+  
+  .cardPlans a {
+    text-decoration: none;
+  }
+  
+  .cardPlans section {
+    color: white;
+  }
+
+  .cardPlans section header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e5f6ff;
+  }
+
+  .cardPlans section header h1, section header p {
+    margin-bottom: 0;
+  }
+
+  .cardPlans section .card {
+    background: #f4f4f4;
+    border-radius: 0.5rem;
+    color: #111;
+    padding: 0.5rem 1rem 1rem 1rem;
+    margin-right: 1rem;
+    box-shadow: 0 15px 35px 0 rgba(42, 51, 83, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06);
+    height: auto !important;
+  }
+  .cardPlans section .cards {
+    display: flex;
+  }
+  .cardPlans section .card:focus {
+    box-shadow: 0 0 0 3px #8baff9;
+    outline: none;
+  }
+  .cardPlans section .card:last-child {
+    margin-right: 0;
+  }
+  .cardPlans section .card span {
+    font-weight: 700;
+    color: #006a85;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .cardPlans section .card h1 {
+    margin: 0.5rem 0rem 0rem 0rem;
+    font-size: 2rem;
+  }
+  .cardPlans section .card h1 span {
+    font-size: 1rem;
+    margin-left: 0.25rem;
+    color: #002b36;
+  }
+  .cardPlans section .card p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .cardPlans section header {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+  
+    .cardPlans .card {
+      margin-right: 0 !important;
+      margin-bottom: 1rem;
+    }
+    .cardPlans .cards {
+      flex-direction: column;
+    }
+  }

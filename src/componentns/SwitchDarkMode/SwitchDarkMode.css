@@ -1,0 +1,67 @@
+.toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.toggle-slot {
+    font-size: 8px;
+    position: relative;
+    height: 2.8em;
+    width: 5.6em;
+    border: 0px solid transparent;
+    border-radius: 8em;
+    background-color: rgba(211, 201, 201, 0.533) ;
+    transition: background-color 200ms;
+}
+
+.toggle-checkbox:checked ~ .toggle-slot {
+    background-color: #374151;
+}
+
+.toggle-button {
+    transform: translate(0.24em, 0.2em);
+    position: absolute;
+    height: 2.4em;
+    width: 2.4em;
+    border-radius: 50%;
+    background-color: #ffeccf;
+    box-shadow: inset 0 0 0 0.6em #ffbb52;
+    transition: background-color 200ms, box-shadow 200ms, transform 400ms cubic-bezier(.26,2,.46,.71);
+}
+
+.toggle-checkbox:checked ~ .toggle-slot .toggle-button {
+    background-color: #485367;
+    box-shadow: inset 0 0 0 0.6em white;
+    transform: translate(2.92em, 0.2em);
+}
+
+.sun-icon,
+.moon-icon {
+    position: absolute;
+    height: 4.8em;
+    width: 4.8em;
+}
+
+.sun-icon-wrapper,
+.moon-icon-wrapper {
+    position: absolute;
+    height: 4.8em;
+    width: 4.8em;
+    opacity: 1;
+    transform: translate(1.6em, 1.6em) rotate(15deg);
+    transform-origin: 50% 50%;
+    transition: opacity 120ms, transform 400ms cubic-bezier(.26,2,.46,.71);
+}
+
+.toggle-checkbox:checked ~ .toggle-slot .sun-icon-wrapper {
+    opacity: 0;
+    transform: translate(2.4em, 1.6em) rotate(0deg);
+}
+
+.toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
+    opacity: 1;
+    transform: translate(1.6em, 1.6em) rotate(-15deg);
+}
