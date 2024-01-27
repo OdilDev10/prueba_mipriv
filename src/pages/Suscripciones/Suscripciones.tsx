@@ -29,7 +29,7 @@ export const Suscripciones = () => {
   const { locale } = useAppContext();
 
   const translations =
-    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
   // const onChange: TableProps<DataType>["onChange"] = (
   //   pagination,

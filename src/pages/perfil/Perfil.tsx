@@ -4,17 +4,29 @@ import { HeaderPages } from "../../componentns/HeaderPages/HeaderPages";
 import Title from "../../componentns/Title";
 import UpaloadImage from "../../componentns/UploadImage";
 import "./Perfil.css";
+import { useAppContext } from "../../context/AppContext";
+import APPTEXT from "../../utils/APPTEXT";
+import Swal from "sweetalert2";
 
 export const Perfil = () => {
+  const { locale } = useAppContext();
+
+  const translations =
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
+
   return (
     <div>
       <HeaderPages
         primaryButton={true}
-        titlePrimaryButton={"Guardar"}
+        titlePrimaryButton={translations.perfilPage.buttonSave}
         metodoPrimaryButton={function (): void {
-          throw new Error("Function not implemented.");
+          Swal.fire({
+            title: translations.perfilPage.titleModalConfirm,
+            text: translations.perfilPage.messageModalConfirm,
+            icon: "success",
+          });
         }}
-        titlePage={"Perfil"}
+        titlePage={translations.perfilPage.title}
       />
       <Card style={{ marginTop: "20px" }}>
         <Row justify={"center"}>
@@ -78,10 +90,13 @@ export const Perfil = () => {
                     flexDirection: "column",
                   }}
                 >
-                  <Title title="Principal" fontSize="1.4rem" />
+                  <Title
+                    title={translations.perfilPage.principal}
+                    fontSize="1.4rem"
+                  />
 
                   <CustomButton
-                    title={"Suscribirme por $25.52 USD al mes"}
+                    title={`${translations.perfilPage.suscribeFor} $25.52 USD ${translations.perfilPage.aMonth}`}
                     type={"primary"}
                     onClick={function (): void {
                       throw new Error("Function not implemented.");
@@ -92,7 +107,10 @@ export const Perfil = () => {
 
               <Col xs={24} lg={11}>
                 <Card style={{ border: "solid 2px lightgray" }}>
-                  <Title title="Chat" fontSize="1.4rem" />
+                  <Title
+                    title={translations.perfilPage.chat}
+                    fontSize="1.4rem"
+                  />
                   <p
                     style={{
                       background: "var(--priv-green)",
@@ -102,7 +120,7 @@ export const Perfil = () => {
                       paddingLeft: "10px",
                     }}
                   >
-                    Hola
+                    {translations.perfilPage.hello}
                   </p>
                   <p
                     style={{
@@ -115,30 +133,30 @@ export const Perfil = () => {
                       paddingRight: "10px",
                     }}
                   >
-                    Como estas?
+                    {translations.perfilPage.howAreYou}
                   </p>
                 </Card>
               </Col>
             </Row>
             <section style={{ marginTop: "20px" }}>
-              <Title title="Colores" fontSize="2rem" />
+              <Title title={translations.perfilPage.colors} fontSize="2rem" />
               <Row gutter={16}>
                 <Col xs={24} lg={8}>
                   <fieldset style={{ padding: "5px" }}>
-                    <legend>Color Principal</legend>
+                    <legend>{translations.perfilPage.principalColor}</legend>
                     <input type="color" name="color1" id="color1" />
                   </fieldset>
                 </Col>
                 <Col xs={24} lg={8}>
                   <fieldset style={{ padding: "5px" }}>
-                    <legend>Color Tag</legend>
+                    <legend>{translations.perfilPage.colorTag}</legend>
                     <input type="color" name="color2" id="color2" />
                   </fieldset>
                 </Col>
 
                 <Col xs={24} lg={8}>
                   <fieldset style={{ padding: "5px" }}>
-                    <legend>Color Chats</legend>
+                    <legend>{translations.perfilPage.colorChat}</legend>
                     <input type="color" name="color3" id="color3" />
                   </fieldset>
                 </Col>
@@ -151,18 +169,18 @@ export const Perfil = () => {
               }}
             />
             <section style={{ marginTop: "20px" }}>
-              <Title title="Imagenes" fontSize="2rem" />
+              <Title title={translations.perfilPage.images} fontSize="2rem" />
 
               <Row gutter={16}>
                 <Col xs={24} lg={12}>
                   <fieldset style={{ padding: "5px" }}>
-                    <legend>Imagen de perfil</legend>
+                    <legend>{translations.perfilPage.imageProfile}</legend>
                     <UpaloadImage />
                   </fieldset>
                 </Col>
                 <Col xs={24} lg={12}>
                   <fieldset style={{ padding: "5px" }}>
-                    <legend>Imagen de portada</legend>
+                    <legend>{translations.perfilPage.profileImage}</legend>
                     <UpaloadImage />
                   </fieldset>
                 </Col>

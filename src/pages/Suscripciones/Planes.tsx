@@ -73,7 +73,6 @@ export const Planes = () => {
 
   const onFinish = () => {
     const values = form.getFieldsValue();
-    console.log(values);
     addCard(values);
     form.resetFields();
     setOpenModal(false);

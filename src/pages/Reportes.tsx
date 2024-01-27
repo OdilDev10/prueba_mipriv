@@ -1,4 +1,10 @@
-import { AndroidOutlined, BarChartOutlined, LineChartOutlined, PieChartOutlined, RadarChartOutlined } from "@ant-design/icons";
+import {
+  AndroidOutlined,
+  BarChartOutlined,
+  LineChartOutlined,
+  PieChartOutlined,
+  RadarChartOutlined,
+} from "@ant-design/icons";
 import { Card, Tabs } from "antd";
 import { TabsProps } from "antd/lib";
 import BarChartExample from "../componentns/Charts/BarChar";
@@ -7,12 +13,19 @@ import { LineChartComponent } from "../componentns/Charts/LineChart";
 import { PieChartComponent } from "../componentns/Charts/PieChart";
 import { RadarChartComponent } from "../componentns/Charts/RadarChart";
 import { HeaderPages } from "../componentns/HeaderPages/HeaderPages";
+import APPTEXT from "../utils/APPTEXT";
+import { useAppContext } from "../context/AppContext";
 
 export const Reportes = () => {
+  const { locale } = useAppContext();
+
+  const translations =
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
+
   const items: TabsProps["items"] = [
     {
       key: "1",
-      label: "Bar",
+      label: translations.reportsPage.tabs.bar,
       children: (
         <>
           <BarChartExample />
@@ -22,7 +35,7 @@ export const Reportes = () => {
     },
     {
       key: "2",
-      label: "Pie",
+      label: translations.reportsPage.tabs.pie,
       children: (
         <>
           <PieChartComponent />
@@ -32,7 +45,7 @@ export const Reportes = () => {
     },
     {
       key: "3",
-      label: "Line",
+      label: translations.reportsPage.tabs.line,
       children: (
         <>
           <LineChartComponent />
@@ -42,7 +55,7 @@ export const Reportes = () => {
     },
     {
       key: "4",
-      label: "Radar",
+      label: translations.reportsPage.tabs.radar,
       children: (
         <>
           <RadarChartComponent />
@@ -52,7 +65,7 @@ export const Reportes = () => {
     },
     {
       key: "5",
-      label: "Blubble",
+      label: translations.reportsPage.tabs.bubble,
       children: (
         <>
           <BubbleChartComponent />
@@ -74,7 +87,7 @@ export const Reportes = () => {
         metodoPrimaryButton={function (): void {
           throw new Error("Function not implemented.");
         }}
-        titlePage={"Reportes"}
+        titlePage={translations.reportsPage.title}
       />
 
       <Card style={{ marginTop: "30px" }}>

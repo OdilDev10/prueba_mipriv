@@ -25,7 +25,6 @@ export const CustomModal = ({
   };
 
   useEffect(() => {
-    console.log(visible);
   }, [visible]);
 
   return (

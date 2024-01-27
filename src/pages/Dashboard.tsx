@@ -21,7 +21,7 @@ export const Dashboard = () => {
   const navigate = useNavigate();
 
   const translations =
-    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
   return (
     <div>
@@ -49,7 +49,12 @@ export const Dashboard = () => {
 
       <div style={{ marginTop: "20px" }}>
         <Title
-          title={translations.dashboard.welcomeMessage}
+          title={
+            translations.dashboard.welcomeMessage +
+              " " +
+              (localStorage.getItem("name_mipriv") ||
+                localStorage.getItem("email_mipriv")) ?? "User"
+          }
           fontSize="1.4rem"
         />
       </div>

@@ -25,14 +25,7 @@ export const SelectLanguaje = () => {
                 gap: "3px",
               }}
             >
-              <img
-                style={{
-                  height: "24px",
-                }}
-                src={'https://odilmartinez.com/img/mexico.png'}
-                alt="Español"
-                title="Español"
-              />{" "}
+              🇲🇽
               <span>ES</span>
             </p>
           ),
@@ -48,15 +41,56 @@ export const SelectLanguaje = () => {
                 gap: "3px",
               }}
             >
-              <img
-                style={{
-                  height: "19px",
-                }}
-                src={'https://odilmartinez.com/img/estados_unidos.png'}
-                alt="Ingles"
-                title="Ingles"
-              />
+              🇺🇸
               <span>EN</span>
+            </p>
+          ),
+        },
+        {
+          value: "pt",
+          label: (
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "3px",
+              }}
+            >
+             🇧🇷
+              <span>PT</span>
+            </p>
+          ),
+        },
+        {
+          value: "ch",
+          label: (
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "3px",
+              }}
+            >
+             🇨🇳
+              <span>CH</span>
+            </p>
+          ),
+        },
+        {
+          value: "fr",
+          label: (
+            <p
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "3px",
+              }}
+            >
+             🇫🇷
+              <span>FR</span>
             </p>
           ),
         },

@@ -39,7 +39,7 @@ export const Ganancias = () => {
   });
 
   const translations =
-    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
   const columns: TableColumnsType<DataType> = [
     {
@@ -434,12 +434,13 @@ export const Ganancias = () => {
               size="large"
               placeholder={translations.earnings.searchPlaceholder}
               prefix={<SearchOutlined />}
+              onChange={() => {}}
             />
           </div>
 
-          <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-            
-          </div>
+          <div
+            style={{ display: "flex", gap: "12px", alignItems: "center" }}
+          ></div>
         </section>
 
         <section style={{ marginTop: "30px" }}>

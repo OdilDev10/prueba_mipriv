@@ -8,7 +8,7 @@ export const Notificaciones = () => {
   const { locale } = useAppContext();
 
   const translations =
-    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
   return (
     <div>

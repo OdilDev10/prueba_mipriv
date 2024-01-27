@@ -1,7 +1,22 @@
 import { Card } from "antd";
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export const NoAuthLayout = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      localStorage.getItem("token_mipriv") ||
+      localStorage.getItem("token_mipriv") !== undefined ||
+      localStorage.getItem("token_mipriv") !== null ||
+      localStorage.getItem("token_mipriv") !== "" ||
+      localStorage.getItem("token_mipriv")?.length
+    ) {
+      navigate("/login");
+    }
+  }, [localStorage.getItem("token_mipriv")]);
+
   return (
     <div
       style={{
@@ -10,19 +25,16 @@ export const NoAuthLayout = () => {
         alignItems: "center",
         height: "100vh",
         backgroundImage: `url('https://www.mipriv.com/img/landing/cover.png')`,
-        objectFit: 'contain',
+        objectFit: "contain",
         // backgroundPosition: "top",
-        backgroundPositionY: '150px'
-        
-        // backgroundImage: `url('https://www.mipriv.com/img/landing/store-description.png')`,
+        backgroundPositionY: "150px",
 
-        
+        // backgroundImage: `url('https://www.mipriv.com/img/landing/store-description.png')`,
       }}
     >
-     
       <Card
         style={{
-          width: "50%",
+          width: "60%",
           padding: "30px",
           display: "flex",
           justifyContent: "center",

@@ -43,7 +43,6 @@ const UpaloadImage: React.FC = () => {
     </button>
   );
 
-  console.log(fileList.length);
 
   return (
     <>

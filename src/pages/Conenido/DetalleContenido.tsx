@@ -19,7 +19,7 @@ export const DetalleContenido = () => {
   const [statusCreate, setStatusCreate] = useState(false);
 
   const translations =
-    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
   useEffect(() => {
     setTitleStatus(
@@ -168,7 +168,9 @@ export const DetalleContenido = () => {
                   {
                     type: "string",
                     required: true,
-                    message: translations.contentDetailPage.messageError.messageDescription,
+                    message:
+                      translations.contentDetailPage.messageError
+                        .messageDescription,
                   },
                 ]}
               >
@@ -184,13 +186,14 @@ export const DetalleContenido = () => {
                 </label>
 
                 <TextArea
-
                   // value={'description'}
                   size="large"
                   style={{
                     width: "100%",
                   }}
-                  placeholder={translations.contentDetailPage.inputs.description}
+                  placeholder={
+                    translations.contentDetailPage.inputs.description
+                  }
                   disabled={status == "Detalle"}
                 />
               </FormItem>

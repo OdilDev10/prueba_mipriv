@@ -18,10 +18,9 @@ export const CardContenido = ({
   const specificDate = moment("2022-01-20");
   const formattedSpecificDate = specificDate.format("YYYY-MM-DD");
 
-
   const translations =
-  APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
-  
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
+
   return (
     <div
       style={{
@@ -95,7 +94,7 @@ export const CardContenido = ({
           <CustomButton
             title={
               <>
-                <DeleteFilled /> {translations.contentDetail.buttonDelete} 
+                <DeleteFilled /> {translations.contentDetail.buttonDelete}
               </>
             }
             type={"primary"}

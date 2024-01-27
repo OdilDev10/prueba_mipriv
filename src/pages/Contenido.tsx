@@ -29,16 +29,14 @@ export const Contenido = () => {
   );
 
   const translations =
-    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
   const removeCard = (index: string) => {
     const newContent = allContent.filter((content) => content.id !== index);
-    console.log(index, "index", newContent);
     setAllContent(newContent);
   };
 
   useEffect(() => {
-    console.log(allContent);
   }, [allContent]);
 
   return (

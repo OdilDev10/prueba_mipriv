@@ -10,16 +10,7 @@ import {
   SecurityScanOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import {
-  Card,
-  Col,
-  Divider,
-  Form,
-  Input,
-  Row,
-  Switch,
-  Tabs
-} from "antd";
+import { Card, Col, Divider, Form, Input, Row, Switch, Tabs } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import { TabsProps } from "antd/lib";
 import { useEffect, useState } from "react";
@@ -30,6 +21,8 @@ import { CustomButton } from "../componentns/CustomButton";
 import { HeaderPages } from "../componentns/HeaderPages/HeaderPages";
 import Title from "../componentns/Title";
 import UpaloadImage from "../componentns/UploadImage";
+import { useAppContext } from "../context/AppContext";
+import APPTEXT from "../utils/APPTEXT";
 
 type TabPosition = "left" | "right" | "top" | "bottom";
 
@@ -38,6 +31,10 @@ export const Configuracion = () => {
   const [ultimeAdded, setUltimeAdded] = useState(1);
   const navigate = useNavigate();
   const [tabPosition, setTabPosition] = useState<TabPosition>("right");
+  const { locale } = useAppContext();
+
+  const translations =
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
   const addCreditCard = () => {
     setUltimeAdded(ultimeAdded + 1);
@@ -49,7 +46,8 @@ export const Configuracion = () => {
               key: (ultimeAdded + 1).toString(),
               label: (
                 <>
-                  Tarjeta {(ultimeAdded + 1).toString()}{" "}
+                  {translations.configurationPage.creditCard}{" "}
+                  {(ultimeAdded + 1).toString()}{" "}
                   <CloseCircleFilled
                     onClick={() => {
                       removeCreditCard((ultimeAdded + 1).toString());
@@ -99,9 +97,8 @@ export const Configuracion = () => {
           showCancelButton: true,
           confirmButtonText: "Look up",
           showLoaderOnConfirm: true,
-          preConfirm: async (login) => {
+          preConfirm: async () => {
             try {
-              console.log(login);
               eliminarLocal();
             } catch (error) {
               Swal.showValidationMessage(`
@@ -120,10 +117,10 @@ export const Configuracion = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -151,11 +148,14 @@ export const Configuracion = () => {
   const items: TabsProps["items"] = [
     {
       key: "1",
-      label: "Perfil",
+      label: translations.configurationPage.tabs.perfil.title,
       children: (
         <>
           <Card>
-            <Title title="Profile Details" fontSize="24px" />
+            <Title
+              title={translations.configurationPage.tabs.perfil.titlePage}
+              fontSize="24px"
+            />
 
             <span
               style={{
@@ -165,7 +165,7 @@ export const Configuracion = () => {
                 marginTop: "4px",
               }}
             >
-              Enter your profile information
+              {translations.configurationPage.tabs.perfil.subTitlePage}
             </span>
 
             <div style={{ marginTop: "24px" }}>
@@ -177,7 +177,7 @@ export const Configuracion = () => {
                   fontWeight: "400",
                 }}
               >
-                Profile Image
+                {translations.configurationPage.tabs.perfil.profileImage}
               </label>
 
               <UpaloadImage />
@@ -204,7 +204,7 @@ export const Configuracion = () => {
                         fontWeight: "400",
                       }}
                     >
-                      First Name
+                      {translations.configurationPage.tabs.perfil.inputs.name}
                     </label>
 
                     <Input
@@ -213,8 +213,9 @@ export const Configuracion = () => {
                       style={{
                         width: "95%",
                       }}
-                      placeholder="First Name"
-                    
+                      placeholder={
+                        translations.configurationPage.tabs.perfil.inputs.name
+                      }
                     />
                   </FormItem>
                 </Col>
@@ -238,7 +239,10 @@ export const Configuracion = () => {
                         fontWeight: "400",
                       }}
                     >
-                      Last Name
+                      {
+                        translations.configurationPage.tabs.perfil.inputs
+                          .lastName
+                      }
                     </label>
 
                     <Input
@@ -247,8 +251,10 @@ export const Configuracion = () => {
                       style={{
                         width: "95%",
                       }}
-                      placeholder="Last Name"
-                     
+                      placeholder={
+                        translations.configurationPage.tabs.perfil.inputs
+                          .lastName
+                      }
                     />
                   </FormItem>
                 </Col>
@@ -272,7 +278,7 @@ export const Configuracion = () => {
                         fontWeight: "400",
                       }}
                     >
-                      Email Address
+                      {translations.configurationPage.tabs.perfil.inputs.email}
                     </label>
 
                     <Input
@@ -281,8 +287,9 @@ export const Configuracion = () => {
                       style={{
                         width: "95%",
                       }}
-                      placeholder="Email Address"
-                   
+                      placeholder={
+                        translations.configurationPage.tabs.perfil.inputs.email
+                      }
                     />
                   </FormItem>
                 </Col>
@@ -306,7 +313,7 @@ export const Configuracion = () => {
                         fontWeight: "400",
                       }}
                     >
-                      Phone Number
+                      {translations.configurationPage.tabs.perfil.inputs.phone}
                     </label>
 
                     <Input
@@ -315,8 +322,9 @@ export const Configuracion = () => {
                       style={{
                         width: "95%",
                       }}
-                      placeholder="Phone Number"
-                   
+                      placeholder={
+                        translations.configurationPage.tabs.perfil.inputs.phone
+                      }
                     />
                   </FormItem>
                 </Col>
@@ -324,7 +332,12 @@ export const Configuracion = () => {
 
               <Divider style={{ borderWidth: "2px" }} />
 
-              <Title title="Regional Settings" fontSize="24px" />
+              <Title
+                title={
+                  translations.configurationPage.tabs.perfil.regionalSettings
+                }
+                fontSize="24px"
+              />
 
               <span
                 style={{
@@ -334,13 +347,13 @@ export const Configuracion = () => {
                   marginTop: "4px",
                 }}
               >
-                Set your language and timezone
+                {translations.configurationPage.tabs.perfil.timeZone}
               </span>
 
               <Row style={{ marginTop: "20px" }}>
                 <Col xs={24} sm={24} lg={12}>
                   <FormItem
-                    name={"languaje"}
+                    name={"language"}
                     rules={[
                       {
                         type: "string",
@@ -350,14 +363,14 @@ export const Configuracion = () => {
                     ]}
                   >
                     <label
-                      htmlFor="languaje"
+                      htmlFor="language"
                       style={{
                         color: "#5A607F",
                         fontSize: "14px",
                         fontWeight: "400",
                       }}
                     >
-                      Language
+                      {translations.configurationPage.tabs.perfil.language}
                     </label>
 
                     <Input
@@ -366,8 +379,9 @@ export const Configuracion = () => {
                       style={{
                         width: "95%",
                       }}
-                      placeholder="Language"
-                   
+                      placeholder={
+                        translations.configurationPage.tabs.perfil.language
+                      }
                     />
                   </FormItem>
                 </Col>
@@ -391,7 +405,7 @@ export const Configuracion = () => {
                         fontWeight: "400",
                       }}
                     >
-                      Timezone
+                      {translations.configurationPage.tabs.perfil.titleTimeZone}
                     </label>
 
                     <Input
@@ -400,8 +414,9 @@ export const Configuracion = () => {
                       style={{
                         width: "95%",
                       }}
-                      placeholder="Timezone"
-                    
+                      placeholder={
+                        translations.configurationPage.tabs.perfil.titleTimeZone
+                      }
                     />
                   </FormItem>
                 </Col>
@@ -414,7 +429,7 @@ export const Configuracion = () => {
     },
     {
       key: "2",
-      label: "Notificaciones",
+      label: translations.configurationPage.tabs.notifications.title,
       children: (
         <>
           <div
@@ -425,7 +440,13 @@ export const Configuracion = () => {
             }}
           >
             <div>
-              <Title title="Personalized Offers" fontSize="24px" />
+              <Title
+                title={
+                  translations.configurationPage.tabs.notifications
+                    .personalizedOffers.title
+                }
+                fontSize="24px"
+              />
 
               <span
                 style={{
@@ -435,7 +456,10 @@ export const Configuracion = () => {
                   marginTop: "4px",
                 }}
               >
-                Receive offers made special for you
+                {
+                  translations.configurationPage.tabs.notifications
+                    .personalizedOffers.description
+                }
               </span>
             </div>
             <Switch />
@@ -450,7 +474,13 @@ export const Configuracion = () => {
             }}
           >
             <div>
-              <Title title="Online Webinars" fontSize="24px" />
+              <Title
+                title={
+                  translations.configurationPage.tabs.notifications
+                    .onlineWebinars.title
+                }
+                fontSize="24px"
+              />
 
               <span
                 style={{
@@ -460,7 +490,10 @@ export const Configuracion = () => {
                   marginTop: "4px",
                 }}
               >
-                Get notified about upcoming webinars
+                {
+                  translations.configurationPage.tabs.notifications
+                    .onlineWebinars.description
+                }
               </span>
             </div>
             <Switch />
@@ -475,7 +508,13 @@ export const Configuracion = () => {
             }}
           >
             <div>
-              <Title title="New Features" fontSize="24px" />
+              <Title
+                title={
+                  translations.configurationPage.tabs.notifications.newFeatures
+                    .title
+                }
+                fontSize="24px"
+              />
 
               <span
                 style={{
@@ -485,33 +524,10 @@ export const Configuracion = () => {
                   marginTop: "4px",
                 }}
               >
-                Updates about new features and product releases
-              </span>
-            </div>
-            <Switch />
-          </div>
-
-          <Divider />
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <div>
-              <Title title="Security and Billing" fontSize="24px" />
-
-              <span
-                style={{
-                  color: "#5A607F",
-                  fontSize: "14px",
-                  fontWeight: "400",
-                  marginTop: "4px",
-                }}
-              >
-                Account security and notifications about billing
+                {
+                  translations.configurationPage.tabs.notifications.newFeatures
+                    .description
+                }
               </span>
             </div>
             <Switch />
@@ -527,7 +543,13 @@ export const Configuracion = () => {
             }}
           >
             <div>
-              <Title title="Marketing" fontSize="24px" />
+              <Title
+                title={
+                  translations.configurationPage.tabs.notifications
+                    .securityBilling.title
+                }
+                fontSize="24px"
+              />
 
               <span
                 style={{
@@ -537,7 +559,45 @@ export const Configuracion = () => {
                   marginTop: "4px",
                 }}
               >
-                Receive marketing newsletters about our new products.
+                {
+                  translations.configurationPage.tabs.notifications
+                    .securityBilling.description
+                }
+              </span>
+            </div>
+            <Switch />
+          </div>
+
+          <Divider />
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <Title
+                title={
+                  translations.configurationPage.tabs.notifications.marketing
+                    .title
+                }
+                fontSize="24px"
+              />
+
+              <span
+                style={{
+                  color: "#5A607F",
+                  fontSize: "14px",
+                  fontWeight: "400",
+                  marginTop: "4px",
+                }}
+              >
+                {
+                  translations.configurationPage.tabs.notifications.marketing
+                    .description
+                }
               </span>
             </div>
             <Switch />
@@ -550,7 +610,7 @@ export const Configuracion = () => {
     },
     {
       key: "3",
-      label: "Cuenta",
+      label: translations.configurationPage.tabs.accountSecurityPage.title,
       children: (
         <>
           <div
@@ -561,7 +621,13 @@ export const Configuracion = () => {
             }}
           >
             <div>
-              <Title title="Darse de baja" fontSize="24px" />
+              <Title
+                title={
+                  translations.configurationPage.tabs.accountSecurityPage
+                    .unsubscribe.title
+                }
+                fontSize="24px"
+              />
 
               <span
                 style={{
@@ -571,7 +637,10 @@ export const Configuracion = () => {
                   marginTop: "4px",
                 }}
               >
-                Eliminar cuenta
+                {
+                  translations.configurationPage.tabs.accountSecurityPage
+                    .unsubscribe.description
+                }
               </span>
             </div>
             <Switch />
@@ -584,7 +653,8 @@ export const Configuracion = () => {
     },
     {
       key: "4",
-      label: "Seguridad",
+      label:
+        translations.configurationPage.tabs.accountSecurityPage.backup.title,
       children: (
         <>
           <div
@@ -605,14 +675,21 @@ export const Configuracion = () => {
                   marginTop: "4px",
                 }}
               >
-                Copia de seguridad
+                {
+                  translations.configurationPage.tabs.accountSecurityPage.backup
+                    .description
+                }
               </span>
             </div>
 
             <CustomButton
               title={
                 <>
-                  <DeleteOutlined /> Eliminar
+                  <DeleteOutlined />{" "}
+                  {
+                    translations.configurationPage.tabs.accountSecurityPage
+                      .backup.deleteButton
+                  }
                 </>
               }
               type={"primary"}
@@ -629,7 +706,9 @@ export const Configuracion = () => {
     },
     {
       key: "5",
-      label: "Metodo de pago",
+      label:
+        translations.configurationPage.tabs.accountSecurityPage.paymentMethod
+          .title,
       children: (
         <>
           <Row justify={"end"} style={{ padding: "5px 0px " }}>
@@ -637,7 +716,11 @@ export const Configuracion = () => {
               type={"primary"}
               title={
                 <>
-                  <PlusCircleFilled /> Agregar
+                  <PlusCircleFilled />{" "}
+                  {
+                    translations.configurationPage.tabs.accountSecurityPage
+                      .paymentMethod.addButton
+                  }
                 </>
               }
               onClick={addCreditCard}
@@ -650,16 +733,7 @@ export const Configuracion = () => {
     },
   ];
 
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
-  useEffect(() => {
-    console.log(
-      (itemsCreditCard!.length + 1).toString(),
-      "(itemsCreditCard!.length + 1).toString()"
-    );
-  }, [itemsCreditCard]);
+  useEffect(() => {}, [itemsCreditCard, translations]);
 
   return (
     <div>
@@ -672,18 +746,19 @@ export const Configuracion = () => {
               gap: "10px",
             }}
           >
-            <SaveFilled /> Guardar
+            <SaveFilled />{" "}
+            {translations.configurationPage.content.header.saveButton}
           </p>
         }
         primaryButton={true}
         metodoPrimaryButton={function (): void {
           throw new Error("Function not implemented.");
         }}
-        titlePage={"Configuracion"}
+        titlePage={translations.configurationPage.content.header.pageTitle}
       />
 
       <Card style={{ width: "100%", marginTop: "20px" }}>
-        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+        <Tabs defaultActiveKey="1" items={items} />
       </Card>
 
       <Card style={{ width: "100%", marginTop: "20px" }}>
@@ -696,19 +771,28 @@ export const Configuracion = () => {
           <CustomButton
             title={
               <>
-                <BackwardOutlined /> Atras
+                <BackwardOutlined />{" "}
+                {
+                  translations.configurationPage.content.navigationButtons
+                    .backButton
+                }
               </>
             }
             type={"transparent"}
             onClick={() => {
               Swal.fire({
-                title: "Estas seguro de volver?",
-                text: "Se perderan los cambios no guardados",
+                title:
+                  translations.configurationPage.content.confirmationDialog
+                    .title,
+                text: translations.configurationPage.content.confirmationDialog
+                  .text,
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Si, volver",
+                confirmButtonText:
+                  translations.configurationPage.content.confirmationDialog
+                    .confirmButtonText,
               }).then((result) => {
                 if (result.isConfirmed) {
                   navigate("/dashboard");
@@ -719,7 +803,8 @@ export const Configuracion = () => {
           <CustomButton
             title={
               <>
-                <SaveFilled /> Guardar
+                <SaveFilled />{" "}
+                {translations.configurationPage.content.header.saveButton}
               </>
             }
             type={"primary"}

@@ -33,7 +33,7 @@ export const Encuestas = () => {
   const { locale } = useAppContext();
 
   const translations =
-    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
   const [encuestas, setEncuestas] = useState([
     {
@@ -123,7 +123,6 @@ export const Encuestas = () => {
 
   const addEncuesta = () => {
     const formValues = form.getFieldsValue();
-    console.log(formValues);
     setEncuestas([...encuestas, formValues]);
     // form.resetFields();
     setOpenModal(false);
@@ -139,8 +138,6 @@ export const Encuestas = () => {
       label: translations.surveysPage.mySurveys,
       children: (
         <>
-       
-
           <CustomModal
             visible={oepnModalEdit}
             onClose={function (): void {
@@ -156,7 +153,6 @@ export const Encuestas = () => {
                   translations={translations}
                   {...encuesta}
                   onClickEdit={() => {
-                    console.log("Hola");
                     setOepnModalEdit(true);
                   }}
                   onClickView={() => {
@@ -195,91 +191,88 @@ export const Encuestas = () => {
 
   return (
     <div>
-
-<CustomModal
-            haveOnOK={false}
-            haveOnCancel={true}
-            title={translations.surveysPage.addSurveys}
-            visible={openModal}
-            onClose={() => setOpenModal(false)}
-            content={
-              <>
-                <Form form={form} onFinish={addEncuesta}>
-                  <Form.Item name="isActive" label="Activa">
-                    <Select>
-                      <Select.Option value={true}>Sí</Select.Option>
-                      <Select.Option value={false}>No</Select.Option>
-                    </Select>
-                  </Form.Item>
-                  <Form.Item name="startDate" label="Fecha de Inicio">
-                    <Input type="datetime-local" />
-                  </Form.Item>
-                  <Form.Item name="endDate" label="Fecha de Fin">
-                    <Input type="datetime-local" />
-                  </Form.Item>
-                  <Form.Item name="title" label="Pregunta">
-                    <Input />
-                  </Form.Item>
-                  <Form.Item name="responses" label="Respuestas">
-                    <Input.Group>
-                      <Form.List name="responses">
-                        {(fields, { add, remove }) => (
-                          <>
-                            {fields.map(({ key, name, ...restField }) => (
-                              <Space
-                                key={key}
-                                style={{ display: "flex", marginBottom: 8 }}
-                                align="baseline"
-                              >
-                                <Form.Item
-                                  {...restField}
-                                  name={[name, "response"]}
-                                  fieldKey={[key + 1, "response"]}
-                                  rules={[
-                                    {
-                                      required: true,
-                                      message: "Ingrese una respuesta",
-                                    },
-                                  ]}
-                                >
-                                  <Input placeholder="Respuesta" />
-                                </Form.Item>
-                                <Button
-                                  type="dashed"
-                                  onClick={() => remove(name)}
-                                  icon={<MinusOutlined />}
-                                />
-                              </Space>
-                            ))}
+      <CustomModal
+        haveOnOK={false}
+        haveOnCancel={true}
+        title={translations.surveysPage.addSurveys}
+        visible={openModal}
+        onClose={() => setOpenModal(false)}
+        content={
+          <>
+            <Form form={form} onFinish={addEncuesta}>
+              <Form.Item name="isActive" label="Activa">
+                <Select>
+                  <Select.Option value={true}>Sí</Select.Option>
+                  <Select.Option value={false}>No</Select.Option>
+                </Select>
+              </Form.Item>
+              <Form.Item name="startDate" label="Fecha de Inicio">
+                <Input type="datetime-local" />
+              </Form.Item>
+              <Form.Item name="endDate" label="Fecha de Fin">
+                <Input type="datetime-local" />
+              </Form.Item>
+              <Form.Item name="title" label="Pregunta">
+                <Input />
+              </Form.Item>
+              <Form.Item name="responses" label="Respuestas">
+                <Input.Group>
+                  <Form.List name="responses">
+                    {(fields, { add, remove }) => (
+                      <>
+                        {fields.map(({ key, name, ...restField }) => (
+                          <Space
+                            key={key}
+                            style={{ display: "flex", marginBottom: 8 }}
+                            align="baseline"
+                          >
+                            <Form.Item
+                              {...restField}
+                              name={[name, "response"]}
+                              fieldKey={[key + 1, "response"]}
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Ingrese una respuesta",
+                                },
+                              ]}
+                            >
+                              <Input placeholder="Respuesta" />
+                            </Form.Item>
                             <Button
                               type="dashed"
-                              onClick={() => add()}
-                              icon={<PlusOutlined />}
-                              disabled={fields.length >= 5} // Limitar a 5 respuestas
-                            >
-                              Agregar Respuesta
-                            </Button>
-                          </>
-                        )}
-                      </Form.List>
-                    </Input.Group>
-                  </Form.Item>
-                  {/* Aquí puedes agregar lógica para manejar las respuestas */}
-                  <Form.Item>
-                    <Space>
-                      <Button type="primary" htmlType="submit">
-                        Agregar Encuesta
-                      </Button>
-                      <Button onClick={() => setOpenModal(false)}>
-                        Cancelar
-                      </Button>
-                    </Space>
-                  </Form.Item>
-                </Form>
-              </>
-            }
-          />
-          
+                              onClick={() => remove(name)}
+                              icon={<MinusOutlined />}
+                            />
+                          </Space>
+                        ))}
+                        <Button
+                          type="dashed"
+                          onClick={() => add()}
+                          icon={<PlusOutlined />}
+                          disabled={fields.length >= 5} // Limitar a 5 respuestas
+                        >
+                          Agregar Respuesta
+                        </Button>
+                      </>
+                    )}
+                  </Form.List>
+                </Input.Group>
+              </Form.Item>
+              {/* Aquí puedes agregar lógica para manejar las respuestas */}
+              <Form.Item>
+                <Space>
+                  <Button type="primary" htmlType="submit">
+                    Agregar Encuesta
+                  </Button>
+                  <Button onClick={() => setOpenModal(false)}>Cancelar</Button>
+                </Space>
+              </Form.Item>
+            </Form>
+          </>
+        }
+      />
+
       <HeaderPages
         primaryButton={true}
         titlePrimaryButton={translations.surveysPage.buttonPrincipal}
@@ -306,11 +299,19 @@ const CardEncuestas: React.FC<CardEncuestasProps> = ({
   title,
   responses,
 }) => {
-  useEffect(() => {}, [translations]);
+  useEffect(() => {
+  }, [translations]);
 
   return (
     <Card>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "10px",
+        }}
+      >
         <span
           style={{
             background: isActive ? "var(--priv-green)" : "var(--priv-primary)",
@@ -335,13 +336,15 @@ const CardEncuestas: React.FC<CardEncuestasProps> = ({
           {`${startDate} | ${endDate}`}
         </span>
 
-        {onClickEdit && (
-          <EditFilled onClick={onClickEdit} style={{ cursor: "pointer" }} />
-        )}
+        <div>
+          {onClickEdit && (
+            <EditFilled onClick={onClickEdit} style={{ cursor: "pointer" }} />
+          )}
 
-        {onClickView && (
-          <EyeFilled style={{ cursor: "pointer" }} onClick={onClickView} />
-        )}
+          {onClickView && (
+            <EyeFilled style={{ cursor: "pointer" }} onClick={onClickView} />
+          )}
+        </div>
       </div>
 
       <div>

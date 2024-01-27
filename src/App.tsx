@@ -20,6 +20,7 @@ import { Planes } from "./pages/Suscripciones/Planes";
 import { Notificaciones } from "./pages/Notificaciones/Notificaciones";
 import { Encuestas } from "./pages/Encuestas/Encuestas";
 import { DetalleEncuestas } from "./pages/Encuestas/DetalleEncuestas";
+import { Register } from "./pages/aurh/Register";
 
 function App() {
   const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -77,6 +78,8 @@ function App() {
 
             <Route path="/" element={<NoAuthLayout />}>
               <Route path="login" index element={<Login />} />
+              <Route path="register" element={<Register />} />
+
             </Route>
             <Route path="*" element={<Error404 />} />
           </Routes>

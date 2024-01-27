@@ -59,7 +59,7 @@ export const ResizeTables = <T extends object>({
 
   // Este useEffect se puede quitar es solo para que typescript no se queje
   useEffect(() => {
-    console.log(setPaginationTable);
+    setPaginationTable([]);
   }, [paginationTable]);
 
   useEffect(() => {
@@ -175,8 +175,6 @@ export const ResizeTables = <T extends object>({
     })),
     additionalColumn,
   ];
-
-  // console.log(borderRadius, "borderRadius");
 
   return (
     <Table

@@ -13,16 +13,17 @@ import { Avatar, Dropdown, Layout, Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Content, Header } from "antd/es/layout/layout";
 import { MenuProps } from "antd/lib";
-import React, { useState } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useAppContext } from "../context/AppContext";
 import { LogoApp } from "../icons/LogoApp";
+import APPTEXT from "../utils/APPTEXT";
 import CustomBreadCrumb from "./CustomBreadCrumb";
+import NotificationCard from "./NotificationCard/NotificationCard";
 import { SelectLanguaje } from "./SelectLanguaje";
 import { SwitchDarkMode } from "./SwitchDarkMode/SwitchDarkMode";
 import Title from "./Title";
-import APPTEXT from "../utils/APPTEXT";
-import NotificationCard from "./NotificationCard/NotificationCard";
 
 type MenuItem = Required<MenuProps>["items"][number];
 function getItem(
@@ -40,18 +41,18 @@ function getItem(
 }
 
 export const AuthLayout = () => {
-  const { isDarkMode, toggleDarkMode, locale } = useAppContext();
+  const { isDarkMode, toggleDarkMode, locale, actualUser, logout } =
+    useAppContext();
   const [collapsed, setCollapsed] = useState(false);
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
 
-  const lastLocation = location.pathname.split("/");
-  const actualLocation = lastLocation[lastLocation.length - 1];
+  // const lastLocation = location.pathname.split("/");
+  // const actualLocation = lastLocation[lastLocation.length - 1];
 
   const translations =
-    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
-  console.log(location.pathname, actualLocation);
   const items: MenuItem[] = [
     getItem(translations.authlayout.dashboard, "dashboard", <HomeOutlined />),
     getItem(translations.authlayout.earnings, "ganancias", <DollarOutlined />),
@@ -85,7 +86,6 @@ export const AuthLayout = () => {
         ),
       ]
     ),
-
     getItem(translations.authlayout.reports, "reportes", <AreaChartOutlined />),
     getItem(
       translations.authlayout.configuration,
@@ -105,9 +105,45 @@ export const AuthLayout = () => {
     },
     {
       key: "2",
-      label: <Link to={"/login"}>{translations.authlayout.logOut}</Link>,
+      label: (
+        <div
+          style={{}}
+          onClick={() => {
+            Swal.fire({
+              title: translations.authlayout.logOut,
+              text: translations.authlayout.modalAlertMessage,
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: translations.authlayout.cancelButton,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                logout();
+                navigate("/login");
+              }
+            });
+          }}
+        >
+          {translations.authlayout.logOut}
+        </div>
+      ),
     },
   ];
+
+  useEffect(() => {
+    if (
+      !localStorage.getItem("token_mipriv") ||
+      localStorage.getItem("token_mipriv") === undefined ||
+      localStorage.getItem("token_mipriv") === null ||
+      localStorage.getItem("token_mipriv") === "" ||
+      localStorage.getItem("token_mipriv")?.length == 0
+    ) {
+      navigate("/login");
+    }
+  }, [localStorage.getItem("token_mipriv")]);
+
+  console.log(actualUser);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -129,11 +165,6 @@ export const AuthLayout = () => {
           bottom: 0,
           zIndex: 100,
         }}
-        // style={{
-        //   position: 'fixed',
-        //   zIndex: 1000, // Ajusta el valor según sea necesario para estar por encima del contenido
-        //   height: '100%', // Ajusta la altura según sea necesario
-        // }}
       >
         <div
           style={{
@@ -161,7 +192,6 @@ export const AuthLayout = () => {
               return;
             }
             navigate(`/dashboard/${e.key}`);
-            console.log(e.key);
           }}
           style={{
             background: isDarkMode
@@ -212,24 +242,36 @@ export const AuthLayout = () => {
                 flexWrap: "wrap",
               }}
             >
-              <NotificationCard/>
+              <NotificationCard />
               <SelectLanguaje />
               <SwitchDarkMode handleDarkMode={toggleDarkMode} />
 
               <Dropdown menu={{ items: itemsPerfil }} placement="bottomRight">
-               <div style={{
-                 display: "flex",
-                 justifyContent: "center",
-                 alignItems: "center",
-                 gap: '4px'
-               }}>
-               <Title title={"Nombre"} fontSize=".8rem" />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "4px",
+                  }}
+                >
+                  <Title
+                    title={localStorage.getItem("name_mipriv")}
+                    fontSize=".8rem"
+                  />
 
-<Avatar
-  // size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-  icon={<img src="https://www.mipriv.com/favicon.svg" />}
-/>
-               </div>
+                  <Avatar
+                    // size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+                    icon={
+                      <img
+                        src={
+                          localStorage.getItem("photo_mipriv") ||
+                          "https://www.mipriv.com/favicon.svg"
+                        }
+                      />
+                    }
+                  />
+                </div>
               </Dropdown>
             </div>
           </Header>

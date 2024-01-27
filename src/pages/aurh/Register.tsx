@@ -1,6 +1,6 @@
 import { Col, Form, Input, Row } from "antd";
 import FormItem from "antd/es/form/FormItem";
-import { ButtonLoginGoogle } from "../../componentns/ButtonLoginGoogle/ButtonLoginGoogle";
+import { useNavigate } from "react-router-dom";
 import { CustomButton } from "../../componentns/CustomButton";
 import { SelectLanguaje } from "../../componentns/SelectLanguaje";
 import { SwitchDarkMode } from "../../componentns/SwitchDarkMode/SwitchDarkMode";
@@ -8,11 +8,10 @@ import Title from "../../componentns/Title";
 import { useAppContext } from "../../context/AppContext";
 import { LogoApp } from "../../icons/LogoApp";
 import APPTEXT from "../../utils/APPTEXT";
-import { useNavigate } from "react-router-dom";
 
-export const Login = () => {
+export const Register = () => {
   const [form] = Form.useForm();
-  const { toggleDarkMode, locale, loginWithGoogle, login } = useAppContext();
+  const { toggleDarkMode, locale, register } = useAppContext();
   const navigate = useNavigate();
 
   const translations =
@@ -20,8 +19,7 @@ export const Login = () => {
 
   const onFinish = () => {
     const values = form.getFieldsValue();
-    console.log(values);
-    login(values.email, values.password);
+    register(values.email, values.password);
   };
 
   return (
@@ -39,7 +37,7 @@ export const Login = () => {
       </Row>
 
       <div style={{ textAlign: "center" }}>
-        <Title title={translations.loginPage.loginButton} fontSize="2rem" />
+        <Title title={translations.loginPage.signIn} fontSize="2rem" />
       </div>
 
       <Form form={form} onFinish={onFinish}>
@@ -56,7 +54,8 @@ export const Login = () => {
                 {
                   type: "string",
                   required: true,
-                  message: translations.subscriptions.modal.messages.emailInvalid,
+                  message:
+                    translations.subscriptions.modal.messages.emailInvalid,
                 },
               ]}
             >
@@ -79,7 +78,6 @@ export const Login = () => {
                 }}
                 placeholder={translations.loginPage.emailPlaceholder}
                 onChange={(e) => form.setFieldsValue({ email: e.target.value })}
-
               />
             </FormItem>
           </Col>
@@ -91,7 +89,7 @@ export const Login = () => {
                 {
                   type: "string",
                   required: true,
-                  message: translations.loginPage.passwordLabel,
+                  message: "Por favor, ingresa la clave",
                 },
               ]}
             >
@@ -108,11 +106,11 @@ export const Login = () => {
 
               <Input
                 // value={provider.Name}
-                type="password"
                 size="large"
                 style={{
                   width: "100%",
                 }}
+                type="password"
                 placeholder={translations.loginPage.passwordPlaceholder}
                 onChange={(e) =>
                   form.setFieldsValue({ password: e.target.value })
@@ -147,18 +145,14 @@ export const Login = () => {
                     fontSize: ".8rem",
                   }}
                 >
-                  {translations.loginPage.loginButton}
+                  {translations.loginPage.signIn}
                 </span>
               </div>
             }
             type={"primary"}
             onClick={() => {
-              // navigate("/dashboard");
-            }}
-          />
-          <ButtonLoginGoogle
-            onClick={() => {
-              loginWithGoogle();
+              onFinish();
+              //   navigate("/dashboard");
             }}
           />
         </div>
@@ -181,10 +175,10 @@ export const Login = () => {
               cursor: "pointer",
             }}
             onClick={() => {
-              navigate("/register");
+              navigate("/login");
             }}
           >
-            {translations.loginPage.signIn}
+            {translations.loginPage.loginButton}
           </span>
         </p>
       </Form>
