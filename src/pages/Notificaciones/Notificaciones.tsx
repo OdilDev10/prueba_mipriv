@@ -1,8 +1,15 @@
 import { Card } from "antd";
 import { HeaderPages } from "../../componentns/HeaderPages/HeaderPages";
 import Title from "../../componentns/Title";
+import { useAppContext } from "../../context/AppContext";
+import APPTEXT from "../../utils/APPTEXT";
 
 export const Notificaciones = () => {
+  const { locale } = useAppContext();
+
+  const translations =
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
+
   return (
     <div>
       <HeaderPages
@@ -11,7 +18,7 @@ export const Notificaciones = () => {
         metodoPrimaryButton={function (): void {
           throw new Error("Function not implemented.");
         }}
-        titlePage={"Notificaciones"}
+        titlePage={translations.notificationsPage.title}
       />
 
       <Card
@@ -23,7 +30,10 @@ export const Notificaciones = () => {
           alignItems: "center",
         }}
       >
-        <Title title={"Listado vacio..."} fontSize="1.2rem" />
+        <Title
+          title={translations.notificationsPage.messageNotList}
+          fontSize="1.2rem"
+        />
       </Card>
     </div>
   );

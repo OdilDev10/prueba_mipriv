@@ -1,7 +1,7 @@
 import { Button, Card, Col, Form, Input, Row, Select, Space, Tabs } from "antd";
 import { HeaderPages } from "../../componentns/HeaderPages/HeaderPages";
 import Title from "../../componentns/Title";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomModal } from "../../componentns/CustomModal/CustomModal";
 import {
   EditFilled,
@@ -11,8 +11,11 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { TabsProps } from "antd/lib";
- 
+import { useAppContext } from "../../context/AppContext";
+import APPTEXT from "../../utils/APPTEXT";
+
 interface CardEncuestasProps {
+  translations: any;
   onClickEdit?: () => void;
   onClickView?: () => void;
   isActive: boolean;
@@ -27,7 +30,10 @@ export const Encuestas = () => {
   const [oepnModalEdit, setOepnModalEdit] = useState(false);
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const { locale } = useAppContext();
 
+  const translations =
+    APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.en;
 
   const [encuestas, setEncuestas] = useState([
     {
@@ -107,8 +113,6 @@ export const Encuestas = () => {
     },
   ]);
 
-
-
   //   const onFinish = () => {
   //     const values = form.getFieldsValue();
   //     console.log(values);
@@ -124,21 +128,78 @@ export const Encuestas = () => {
     // form.resetFields();
     setOpenModal(false);
 
-    return 
-    setEncuestasPublicas([])
-    setItemsTabs([])
+    return;
+    setEncuestasPublicas([]);
+    setItemsTabs([]);
   };
 
   const [itemsTabs, setItemsTabs] = useState<TabsProps["items"]>([
     {
       key: "1",
-      label: "Mis encuestas",
+      label: translations.surveysPage.mySurveys,
       children: (
         <>
+       
+
           <CustomModal
+            visible={oepnModalEdit}
+            onClose={function (): void {
+              throw new Error("Function not implemented.");
+            }}
+            content={<>AQUI</>}
+          />
+
+          <Row gutter={[16, 16]}>
+            {encuestas.map((encuesta, index) => (
+              <Col key={index} xs={24} sm={24} lg={12}>
+                <CardEncuestas
+                  translations={translations}
+                  {...encuesta}
+                  onClickEdit={() => {
+                    console.log("Hola");
+                    setOepnModalEdit(true);
+                  }}
+                  onClickView={() => {
+                    navigate(`/dashboard/encuestas/${index + 1}`);
+                  }}
+                />
+              </Col>
+            ))}
+          </Row>
+        </>
+      ),
+    },
+    {
+      key: "2",
+      label: translations.surveysPage.publicSurveys,
+      children: (
+        <>
+          <Row gutter={[16, 16]}>
+            {encuestasPlubicas.map((encuesta, index) => (
+              <Col
+                key={index}
+                xs={24}
+                sm={24}
+                lg={12}
+                onClick={() => navigate(`/dashboard/encuestas/${index + 1}`)}
+                style={{ cursor: "pointer" }}
+              >
+                <CardEncuestas {...encuesta} translations={translations} />
+              </Col>
+            ))}
+          </Row>
+        </>
+      ),
+    },
+  ]);
+
+  return (
+    <div>
+
+<CustomModal
             haveOnOK={false}
             haveOnCancel={true}
-            title={"Agregar encuestas"}
+            title={translations.surveysPage.addSurveys}
             visible={openModal}
             onClose={() => setOpenModal(false)}
             content={
@@ -218,69 +279,14 @@ export const Encuestas = () => {
               </>
             }
           />
-
-          <CustomModal
-            visible={oepnModalEdit}
-            onClose={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-            content={<>
-            AQUI
-            </>}
-          />
-
-          <Row gutter={[16, 16]}>
-            {encuestas.map((encuesta, index) => (
-              <Col key={index} xs={24} sm={24} lg={12}>
-                <CardEncuestas
-                  {...encuesta}
-                  onClickEdit={() => {
-                    console.log("Hola");
-                    setOepnModalEdit(true);
-                  }}
-                  onClickView={() => {
-                    navigate(`/dashboard/encuestas/${index + 1}`);
-                  }}
-                />
-              </Col>
-            ))}
-          </Row>
-        </>
-      ),
-    },
-    {
-      key: "2",
-      label: "Encuestas publicas",
-      children: (
-        <>
-          <Row gutter={[16, 16]}>
-            {encuestasPlubicas.map((encuesta, index) => (
-              <Col
-                key={index}
-                xs={24}
-                sm={24}
-                lg={12}
-                onClick={() => navigate(`/dashboard/encuestas/${index + 1}`)}
-                style={{ cursor: "pointer" }}
-              >
-                <CardEncuestas {...encuesta} />
-              </Col>
-            ))}
-          </Row>
-        </>
-      ),
-    },
-  ]);
-
-  return (
-    <div>
+          
       <HeaderPages
         primaryButton={true}
-        titlePrimaryButton={"Agregar encuesta"}
+        titlePrimaryButton={translations.surveysPage.buttonPrincipal}
         metodoPrimaryButton={function (): void {
           setOpenModal(true);
         }}
-        titlePage={"Encuestas"}
+        titlePage={translations.surveysPage.title}
       />
 
       <Card style={{ marginTop: "30px" }}>
@@ -291,6 +297,7 @@ export const Encuestas = () => {
 };
 
 const CardEncuestas: React.FC<CardEncuestasProps> = ({
+  translations,
   onClickEdit,
   onClickView,
   isActive,
@@ -299,7 +306,7 @@ const CardEncuestas: React.FC<CardEncuestasProps> = ({
   title,
   responses,
 }) => {
-  console.log(onClickEdit);
+  useEffect(() => {}, [translations]);
 
   return (
     <Card>
@@ -313,7 +320,9 @@ const CardEncuestas: React.FC<CardEncuestasProps> = ({
             color: "#fff",
           }}
         >
-          {isActive ? "Activa" : "Desactiva"}
+          {isActive
+            ? translations.surveysPage.active
+            : translations.surveysPage.desactive}
         </span>
 
         <span
@@ -347,7 +356,7 @@ const CardEncuestas: React.FC<CardEncuestasProps> = ({
             flexWrap: "wrap",
           }}
         >
-          <legend>Respuestas</legend>
+          <legend>{translations.surveysPage.responses}</legend>
           {responses.map((response, index) => (
             <span key={index}>
               {index + 1}. {response.response}

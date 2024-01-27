@@ -149,6 +149,30 @@ const APPTEXT = {
         description: "",
       },
     },
+    notificationsPage: {
+      title: "Notificaciones",
+      messageNotList: "Listado vacio...",
+    },
+    surveysPage: {
+      title: "Encuestas",
+      buttonPrincipal: "Agregar encuestas",
+      mySurveys: "Mis encuestas",
+      publicSurveys: "Encuestas publicas",
+      active: "Activo",
+      desactive: "Desactiva",
+      responses: "Respuestas",
+      addSurveys: "Agregar encuestas",
+      surveysForm: {
+        isActive: "Activa",
+        startDate: "Fecha de Inicio",
+        endDate: "Fecha de Fin",
+        title: "Pregunta",
+        responses: "Respuestas",
+        addResponse: "Agregar Respuesta",
+        submitButton: "Agregar Encuesta",
+        cancelButton: "Cancelar",
+      },
+    }
   },
   en: {
     authlayout: {
@@ -300,6 +324,21 @@ const APPTEXT = {
         description: "Description",
       },
     },
+    notificationsPage: {
+      title: "Notifications",
+      messageNotList: "List empty...",
+    },
+    surveysPage: {
+      title: "Surveys",
+      buttonPrincipal: "Add Survey",
+      mySurveys: "My Surveys",
+      publicSurveys: "Public surveys",
+      active: "Active",
+      desactive: "Disabled",
+      responses: "Responses",
+      addSurveys: "Add Survey",
+
+    }
   },
 };
 
