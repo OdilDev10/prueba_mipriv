@@ -10,7 +10,7 @@ import {
   SecurityScanOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Card, Col, Divider, Form, Input, Row, Switch, Tabs } from "antd";
+import { Card, Col, Divider, Form, Input, Row, Switch, Tabs, message } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import { TabsProps } from "antd/lib";
 import { useEffect, useState } from "react";
@@ -752,7 +752,8 @@ export const Configuracion = () => {
         }
         primaryButton={true}
         metodoPrimaryButton={function (): void {
-          throw new Error("Function not implemented.");
+          message.info("This will be implemented");
+
         }}
         titlePage={translations.configurationPage.content.header.pageTitle}
       />
@@ -809,7 +810,8 @@ export const Configuracion = () => {
             }
             type={"primary"}
             onClick={function (): void {
-              throw new Error("Function not implemented.");
+              message.info("This will be implemented");
+
             }}
           />
         </div>

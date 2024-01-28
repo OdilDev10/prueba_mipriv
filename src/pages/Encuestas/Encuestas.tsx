@@ -1,4 +1,15 @@
-import { Button, Card, Col, Form, Input, Row, Select, Space, Tabs } from "antd";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Row,
+  Select,
+  Space,
+  Tabs,
+  message,
+} from "antd";
 import { HeaderPages } from "../../componentns/HeaderPages/HeaderPages";
 import Title from "../../componentns/Title";
 import React, { useEffect, useState } from "react";
@@ -130,6 +141,7 @@ export const Encuestas = () => {
     return;
     setEncuestasPublicas([]);
     setItemsTabs([]);
+    setOepnModalEdit(false)
   };
 
   const [itemsTabs, setItemsTabs] = useState<TabsProps["items"]>([
@@ -153,10 +165,14 @@ export const Encuestas = () => {
                   translations={translations}
                   {...encuesta}
                   onClickEdit={() => {
-                    setOepnModalEdit(true);
+                    message.info("This will by implemented");
+
+                    // setOepnModalEdit(true);
                   }}
                   onClickView={() => {
-                    navigate(`/dashboard/encuestas/${index + 1}`);
+                    message.info("This will by implemented");
+
+                    // navigate(`/dashboard/encuestas/${index + 1}`);
                   }}
                 />
               </Col>
@@ -299,8 +315,7 @@ const CardEncuestas: React.FC<CardEncuestasProps> = ({
   title,
   responses,
 }) => {
-  useEffect(() => {
-  }, [translations]);
+  useEffect(() => {}, [translations]);
 
   return (
     <Card>

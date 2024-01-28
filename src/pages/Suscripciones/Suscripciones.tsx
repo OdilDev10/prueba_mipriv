@@ -1,5 +1,5 @@
 import { MailFilled, SearchOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Input, Row, TableColumnsType } from "antd";
+import { Button, Card, Col, Input, Row, TableColumnsType, message } from "antd";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -240,6 +240,17 @@ export const Suscripciones = () => {
     },
   ];
 
+
+  let typingTimer: any;
+
+  function onTyping() {
+    clearTimeout(typingTimer);
+
+    typingTimer = setTimeout(() => {
+      message.info("This will be implemented");
+    }, 600);
+  }
+
   return (
     <div>
       <CustomModal
@@ -352,6 +363,7 @@ export const Suscripciones = () => {
               size="large"
               placeholder={translations.subscriptions.searchPlaceholder}
               prefix={<SearchOutlined />}
+              onChange={onTyping}
             />
           </div>
 

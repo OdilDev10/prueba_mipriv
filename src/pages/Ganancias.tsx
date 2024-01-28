@@ -4,7 +4,7 @@ import {
   MailFilled,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Button, Card, Col, Input, Row, TableColumnsType } from "antd";
+import { Button, Card, Col, Input, Row, TableColumnsType, message } from "antd";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
@@ -150,6 +150,8 @@ export const Ganancias = () => {
                       text: translations.earnings.messageModalConfirm,
                       icon: "success",
                     });
+
+                    message.info("This will by implemented");
                   }
                 });
               }}
@@ -301,6 +303,16 @@ export const Ganancias = () => {
     translations;
   }, [translations]);
 
+  let typingTimer: any;
+
+  function onTyping() {
+    clearTimeout(typingTimer);
+
+    typingTimer = setTimeout(() => {
+      message.info("This will be implemented");
+    }, 600);
+  }
+  
   return (
     <div>
       <CustomModal
@@ -434,7 +446,9 @@ export const Ganancias = () => {
               size="large"
               placeholder={translations.earnings.searchPlaceholder}
               prefix={<SearchOutlined />}
-              onChange={() => {}}
+              onChange={() => {
+                onTyping();
+              }}
             />
           </div>
 

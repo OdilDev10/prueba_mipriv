@@ -1,25 +1,46 @@
-import { Col, Form, Input, Row } from "antd";
+import { Col, Form, Input, Row, message } from "antd";
 import FormItem from "antd/es/form/FormItem";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { CustomButton } from "../../componentns/CustomButton";
 import { SelectLanguaje } from "../../componentns/SelectLanguaje";
 import { SwitchDarkMode } from "../../componentns/SwitchDarkMode/SwitchDarkMode";
 import Title from "../../componentns/Title";
 import { useAppContext } from "../../context/AppContext";
+import { authGlobalFirebase } from "../../firebase/firebase.config";
 import { LogoApp } from "../../icons/LogoApp";
 import APPTEXT from "../../utils/APPTEXT";
 
 export const Register = () => {
   const [form] = Form.useForm();
-  const { toggleDarkMode, locale, register } = useAppContext();
+  const { toggleDarkMode, locale } = useAppContext();
   const navigate = useNavigate();
 
   const translations =
     APPTEXT[locale.locale as keyof typeof APPTEXT] || APPTEXT.es;
 
-  const onFinish = () => {
-    const values = form.getFieldsValue();
-    register(values.email, values.password);
+  const register = async () => {
+    try {
+      const values = form.getFieldsValue();
+
+      const response = await createUserWithEmailAndPassword(
+        authGlobalFirebase,
+        values.email,
+        values.password
+      );
+
+      const idToken = await response.user.getIdToken();
+      if (idToken) {
+        message.success("Registrado");
+        navigate("/login");
+      } else {
+        message.error("Error in registration: idToken not available");
+      }
+    } catch (error) {
+      message.error(`Registration error: ${error}`, );
+      console.error("Registration error:", error);
+      return `Registration failed: ${error}`;
+    }
   };
 
   return (
@@ -40,7 +61,7 @@ export const Register = () => {
         <Title title={translations.loginPage.signIn} fontSize="2rem" />
       </div>
 
-      <Form form={form} onFinish={onFinish}>
+      <Form form={form}>
         <Row
           gutter={[16, 16]}
           style={{
@@ -151,7 +172,7 @@ export const Register = () => {
             }
             type={"primary"}
             onClick={() => {
-              onFinish();
+              register();
               //   navigate("/dashboard");
             }}
           />

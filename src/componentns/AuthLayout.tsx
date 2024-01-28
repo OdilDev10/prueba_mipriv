@@ -41,8 +41,7 @@ function getItem(
 }
 
 export const AuthLayout = () => {
-  const { isDarkMode, toggleDarkMode, locale, actualUser, logout } =
-    useAppContext();
+  const { isDarkMode, toggleDarkMode, locale, logout } = useAppContext();
   const [collapsed, setCollapsed] = useState(false);
   // const location = useLocation();
   const navigate = useNavigate();
@@ -119,8 +118,14 @@ export const AuthLayout = () => {
               confirmButtonText: translations.authlayout.cancelButton,
             }).then((result) => {
               if (result.isConfirmed) {
+                localStorage.removeItem("token_mipriv");
+                localStorage.removeItem("email_mipriv");
+                localStorage.removeItem("name_mipriv");
+                localStorage.removeItem("photo_mipriv");
                 logout();
-                navigate("/login");
+                setTimeout(() => {
+                  navigate("/login");
+                }, 200);
               }
             });
           }}
@@ -132,18 +137,12 @@ export const AuthLayout = () => {
   ];
 
   useEffect(() => {
-    if (
-      !localStorage.getItem("token_mipriv") ||
-      localStorage.getItem("token_mipriv") === undefined ||
-      localStorage.getItem("token_mipriv") === null ||
-      localStorage.getItem("token_mipriv") === "" ||
-      localStorage.getItem("token_mipriv")?.length == 0
-    ) {
+    const token = localStorage.getItem("token_mipriv");
+
+    if (!token || token === "undefined" || token === null || token === "") {
       navigate("/login");
     }
-  }, [localStorage.getItem("token_mipriv")]);
-
-  console.log(actualUser);
+  }, []);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -256,7 +255,11 @@ export const AuthLayout = () => {
                   }}
                 >
                   <Title
-                    title={localStorage.getItem("name_mipriv")}
+                    title={
+                      (localStorage.getItem("name_mipriv") ||
+                        localStorage.getItem("email_mipriv")) ??
+                      "User"
+                    }
                     fontSize=".8rem"
                   />
 

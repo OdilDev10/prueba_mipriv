@@ -1,4 +1,4 @@
-import { Card, Col, Form, Input, Row } from "antd";
+import { Card, Col, Form, Input, Row, message } from "antd";
 import FormItem from "antd/es/form/FormItem";
 import TextArea from "antd/es/input/TextArea";
 import { HeaderPages } from "../../componentns/HeaderPages/HeaderPages";
@@ -211,12 +211,14 @@ export const DetalleContenido = () => {
                     text: translations.contentDetailPage.alert.contentSecond,
                     icon: "success",
                   });
+                  message.info("This will be implemented");
                 } else {
                   Swal.fire({
                     title: translations.contentDetailPage.alert.titleThird,
                     text: translations.contentDetailPage.alert.contentThird,
                     icon: "success",
                   });
+                  message.info("This will be implemented");
                 }
               }}
             />

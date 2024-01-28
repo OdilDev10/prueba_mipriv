@@ -1,19 +1,18 @@
 import { Card } from "antd";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import './NoAuthLayout.css'
 
 export const NoAuthLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      localStorage.getItem("token_mipriv") ||
-      localStorage.getItem("token_mipriv") !== undefined ||
-      localStorage.getItem("token_mipriv") !== null ||
-      localStorage.getItem("token_mipriv") !== "" ||
-      localStorage.getItem("token_mipriv")?.length
-    ) {
-      navigate("/login");
+    const token = localStorage.getItem("token_mipriv");
+
+    if (token && token !== "undefined" && token !== null && token !== "") {
+      navigate("/dashboard");
+    }else{
+
     }
   }, [localStorage.getItem("token_mipriv")]);
 
@@ -33,9 +32,10 @@ export const NoAuthLayout = () => {
       }}
     >
       <Card
+      className="custom_card_login"
         style={{
           width: "60%",
-          padding: "30px",
+          padding: "20px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

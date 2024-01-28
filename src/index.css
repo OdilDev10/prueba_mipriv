@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
 :root {
   --priv-low-black: #27273b;
@@ -9,11 +8,10 @@
   --priv-primary: #ff005c;
   --priv-high-primary: #cc0049;
   --priv-white-background: #fffff7;
-  --priv-green: #06A561;
-  
+  --priv-green: #06a561;
 
   /* color-scheme: light dark; */
-  
+
   font-family: "Josefin Sans", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,18 +19,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.global_dark_mode .swal2-popup{
+.global_dark_mode .swal2-popup {
   background-color: var(--priv-low-black);
   color: var(--priv-white-background);
 }
 
-.global_dark_mode .swal2-title{
+.global_dark_mode .swal2-title {
   color: var(--priv-primary);
 }
 
-*{
+* {
   padding: 0;
   margin: 0;
   font-family: "Josefin Sans", sans-serif;
+}
 
+:where(.css-dev-only-do-not-override-9p1wwq).ant-layout
+  .ant-layout-sider-light
+  .ant-layout-sider-trigger,
+:where(.css-dev-only-do-not-override-fm3ryb).ant-layout
+  .ant-layout-sider-trigger {
+  background-color: var(--priv-primary);
+  background-color: var(--priv-primary);
 }

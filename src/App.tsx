@@ -1,5 +1,5 @@
 import { ConfigProvider, theme } from "antd";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { useAppContext } from "./context/AppContext";
 import { Contenido } from "./pages/Contenido";
 import { Dashboard } from "./pages/Dashboard";
@@ -9,7 +9,7 @@ import { Suscripciones } from "./pages/Suscripciones/Suscripciones";
 
 import "./App.css";
 import { AuthLayout } from "./componentns/AuthLayout";
-import { NoAuthLayout } from "./componentns/NoAuthLayout";
+import { NoAuthLayout } from "./componentns/NoAuthLayout/NoAuthLayout";
 import { Configuracion } from "./pages/Configuracion";
 import { DetallesSuscripciones } from "./pages/DetallesSuscripciones";
 import { Login } from "./pages/aurh/Login";
@@ -77,6 +77,8 @@ function App() {
             </Route>
 
             <Route path="/" element={<NoAuthLayout />}>
+            <Route  index element={<><Navigate to={"/login"}/></>} />
+
               <Route path="login" index element={<Login />} />
               <Route path="register" element={<Register />} />
 

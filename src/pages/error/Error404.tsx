@@ -5,7 +5,7 @@ export const Error404 = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      navigate("/dashboard");
+      navigate("/");
   }, []);
 
   return <div>
