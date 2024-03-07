@@ -53,7 +53,7 @@ export const Dashboard = () => {
             translations.dashboard.welcomeMessage +
               " " +
               (localStorage.getItem("name_mipriv") ||
-                localStorage.getItem("email_mipriv")) ?? "User"
+                localStorage.getItem("email_mipriv")) || "User"
           }
           fontSize="1.4rem"
         />
