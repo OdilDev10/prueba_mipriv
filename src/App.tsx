@@ -1,26 +1,38 @@
 import { ConfigProvider, theme } from "antd";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useAppContext } from "./context/AppContext";
-import { Contenido } from "./pages/Contenido";
-import { Dashboard } from "./pages/Dashboard";
-import { Ganancias } from "./pages/Ganancias";
-import { Reportes } from "./pages/Reportes";
-import { Suscripciones } from "./pages/Suscripciones/Suscripciones";
-
+import { lazy } from "react";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AuthLayout } from "./componentns/AuthLayout";
-import { NoAuthLayout } from "./componentns/NoAuthLayout/NoAuthLayout";
-import { Configuracion } from "./pages/Configuracion";
-import { DetallesSuscripciones } from "./pages/DetallesSuscripciones";
-import { Login } from "./pages/aurh/Login";
+import { useAppContext } from "./context/AppContext";
 import { Error404 } from "./pages/error/Error404";
-import { Perfil } from "./pages/perfil/Perfil";
-import { DetalleContenido } from "./pages/Conenido/DetalleContenido";
-import { Planes } from "./pages/Suscripciones/Planes";
-import { Notificaciones } from "./pages/Notificaciones/Notificaciones";
-import { Encuestas } from "./pages/Encuestas/Encuestas";
-import { DetalleEncuestas } from "./pages/Encuestas/DetalleEncuestas";
-import { Register } from "./pages/aurh/Register";
+
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const AuthLayout = lazy(() => import("./componentns/AuthLayout"));
+const NoAuthLayout = lazy(
+  () => import("./componentns/NoAuthLayout/NoAuthLayout")
+);
+
+const DetalleContenido = lazy(
+  () => import("./pages/Conenido/DetalleContenido")
+);
+const Configuracion = lazy(() => import("./pages/Configuracion"));
+const Contenido = lazy(() => import("./pages/Contenido"));
+const DetallesSuscripciones = lazy(
+  () => import("./pages/DetallesSuscripciones")
+);
+const DetalleEncuestas = lazy(
+  () => import("./pages/Encuestas/DetalleEncuestas")
+);
+const Encuestas = lazy(() => import("./pages/Encuestas/Encuestas"));
+const Ganancias = lazy(() => import("./pages/Ganancias"));
+const Notificaciones = lazy(
+  () => import("./pages/Notificaciones/Notificaciones")
+);
+const Reportes = lazy(() => import("./pages/Reportes"));
+const Planes = lazy(() => import("./pages/Suscripciones/Planes"));
+const Suscripciones = lazy(() => import("./pages/Suscripciones/Suscripciones"));
+const Login = lazy(() => import("./pages/aurh/Login"));
+const Register = lazy(() => import("./pages/aurh/Register"));
+const Perfil = lazy(() => import("./pages/perfil/Perfil"));
 
 function App() {
   const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -50,7 +62,7 @@ function App() {
           },
         }}
       >
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/dashboard" element={<AuthLayout />}>
               <Route index element={<Dashboard />} />
@@ -77,15 +89,21 @@ function App() {
             </Route>
 
             <Route path="/" element={<NoAuthLayout />}>
-            <Route  index element={<><Navigate to={"/login"}/></>} />
+              <Route
+                index
+                element={
+                  <>
+                    <Navigate to={"/login"} />
+                  </>
+                }
+              />
 
               <Route path="login" index element={<Login />} />
               <Route path="register" element={<Register />} />
-
             </Route>
             <Route path="*" element={<Error404 />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </ConfigProvider>
     </>
   );

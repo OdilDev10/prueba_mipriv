@@ -9,11 +9,11 @@ import {
   SettingOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
-import { Avatar, Dropdown, Layout, Menu } from "antd";
+import { Avatar, Dropdown, Layout, Menu, Spin } from "antd";
 import Sider from "antd/es/layout/Sider";
 import { Content, Header } from "antd/es/layout/layout";
 import { MenuProps } from "antd/lib";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useAppContext } from "../context/AppContext";
@@ -40,7 +40,7 @@ function getItem(
   } as MenuItem;
 }
 
-export const AuthLayout = () => {
+const AuthLayout = () => {
   const { isDarkMode, toggleDarkMode, locale, logout } = useAppContext();
   const [collapsed, setCollapsed] = useState(false);
   // const location = useLocation();
@@ -288,11 +288,15 @@ export const AuthLayout = () => {
             <div style={{ marginBottom: "10px" }}>
               <CustomBreadCrumb />
             </div>
-
-            <Outlet />
+            <Suspense fallback={<Spin />}>
+              <Outlet />
+            </Suspense>
           </Content>
         </div>
       </Layout>
     </Layout>
   );
 };
+
+
+export default AuthLayout

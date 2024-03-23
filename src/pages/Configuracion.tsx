@@ -26,7 +26,7 @@ import APPTEXT from "../utils/APPTEXT";
 
 type TabPosition = "left" | "right" | "top" | "bottom";
 
-export const Configuracion = () => {
+ const Configuracion = () => {
   const [form] = Form.useForm();
   const [ultimeAdded, setUltimeAdded] = useState(1);
   const navigate = useNavigate();
@@ -819,3 +819,5 @@ export const Configuracion = () => {
     </div>
   );
 };
+
+export default Configuracion

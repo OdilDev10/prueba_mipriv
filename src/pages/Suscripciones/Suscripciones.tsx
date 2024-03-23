@@ -23,7 +23,7 @@ interface DataType {
   image: string; // Puedes ajustar el tipo según tus necesidades
 }
 
-export const Suscripciones = () => {
+ const Suscripciones = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const { locale } = useAppContext();
@@ -380,3 +380,4 @@ export const Suscripciones = () => {
     </div>
   );
 };
+export default Suscripciones

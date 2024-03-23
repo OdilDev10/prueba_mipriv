@@ -17,7 +17,7 @@ import {
 import { authGlobalFirebase } from "../../firebase/firebase.config";
 import { useState } from "react";
 
-export const Login = () => {
+const Login = () => {
   const [form] = Form.useForm();
   const { toggleDarkMode, locale } = useAppContext();
   const navigate = useNavigate();
@@ -251,3 +251,6 @@ export const Login = () => {
     </div>
   );
 };
+
+
+export default Login

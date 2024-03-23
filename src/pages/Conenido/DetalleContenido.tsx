@@ -9,7 +9,7 @@ import { CustomButton } from "../../componentns/CustomButton";
 import { useAppContext } from "../../context/AppContext";
 import APPTEXT from "../../utils/APPTEXT";
 
-export const DetalleContenido = () => {
+ const DetalleContenido = () => {
   const { locale } = useAppContext();
   const [status, setStatus] = useState<"Detalle" | "Editar">("Detalle");
   const [form] = Form.useForm();
@@ -228,3 +228,4 @@ export const DetalleContenido = () => {
     </div>
   );
 };
+export default DetalleContenido

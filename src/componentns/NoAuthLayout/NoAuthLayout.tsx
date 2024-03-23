@@ -1,9 +1,9 @@
-import { Card } from "antd";
-import { useEffect } from "react";
+import { Card, Spin } from "antd";
+import { Suspense, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import './NoAuthLayout.css'
+import "./NoAuthLayout.css";
 
-export const NoAuthLayout = () => {
+const NoAuthLayout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -11,8 +11,7 @@ export const NoAuthLayout = () => {
 
     if (token && token !== "undefined" && token !== null && token !== "") {
       navigate("/dashboard");
-    }else{
-
+    } else {
     }
   }, [localStorage.getItem("token_mipriv")]);
 
@@ -32,7 +31,7 @@ export const NoAuthLayout = () => {
       }}
     >
       <Card
-      className="custom_card_login"
+        className="custom_card_login"
         style={{
           width: "60%",
           padding: "20px",
@@ -41,8 +40,11 @@ export const NoAuthLayout = () => {
           alignItems: "center",
         }}
       >
-        <Outlet />
+        <Suspense fallback={<Spin />}>
+          <Outlet />
+        </Suspense>
       </Card>
     </div>
   );
 };
+export default NoAuthLayout

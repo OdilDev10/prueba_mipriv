@@ -16,7 +16,7 @@ import { HeaderPages } from "../componentns/HeaderPages/HeaderPages";
 import APPTEXT from "../utils/APPTEXT";
 import { useAppContext } from "../context/AppContext";
 
-export const Reportes = () => {
+ const Reportes = () => {
   const { locale } = useAppContext();
 
   const translations =
@@ -96,3 +96,6 @@ export const Reportes = () => {
     </div>
   );
 };
+
+
+export default Reportes

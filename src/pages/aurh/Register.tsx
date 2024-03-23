@@ -11,7 +11,7 @@ import { authGlobalFirebase } from "../../firebase/firebase.config";
 import { LogoApp } from "../../icons/LogoApp";
 import APPTEXT from "../../utils/APPTEXT";
 
-export const Register = () => {
+ const Register = () => {
   const [form] = Form.useForm();
   const { toggleDarkMode, locale } = useAppContext();
   const navigate = useNavigate();
@@ -206,3 +206,5 @@ export const Register = () => {
     </div>
   );
 };
+
+export default Register

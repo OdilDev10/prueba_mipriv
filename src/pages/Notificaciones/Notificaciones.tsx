@@ -4,7 +4,7 @@ import Title from "../../componentns/Title";
 import { useAppContext } from "../../context/AppContext";
 import APPTEXT from "../../utils/APPTEXT";
 
-export const Notificaciones = () => {
+const Notificaciones = () => {
   const { locale } = useAppContext();
 
   const translations =
@@ -38,3 +38,5 @@ export const Notificaciones = () => {
     </div>
   );
 };
+
+export default Notificaciones;

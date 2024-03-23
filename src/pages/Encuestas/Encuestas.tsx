@@ -386,4 +386,4 @@ const CardEncuestas: React.FC<CardEncuestasProps> = ({
   );
 };
 
-export default CardEncuestas;
+export default Encuestas;

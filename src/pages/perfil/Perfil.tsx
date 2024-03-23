@@ -8,7 +8,7 @@ import { useAppContext } from "../../context/AppContext";
 import APPTEXT from "../../utils/APPTEXT";
 import Swal from "sweetalert2";
 
-export const Perfil = () => {
+ const Perfil = () => {
   const { locale } = useAppContext();
 
   const translations =
@@ -192,3 +192,4 @@ export const Perfil = () => {
     </div>
   );
 };
+export default Perfil

@@ -16,7 +16,7 @@ import Title from "../componentns/Title";
 import { useAppContext } from "../context/AppContext";
 import APPTEXT from "../utils/APPTEXT";
 
-export const Dashboard = () => {
+const Dashboard = () => {
   const { locale } = useAppContext();
   const navigate = useNavigate();
 
@@ -323,3 +323,5 @@ export const Dashboard = () => {
     </div>
   );
 };
+
+export default Dashboard

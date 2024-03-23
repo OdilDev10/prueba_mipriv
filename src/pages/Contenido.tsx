@@ -12,7 +12,7 @@ import UpaloadImage from "../componentns/UploadImage";
 import { useAppContext } from "../context/AppContext";
 import APPTEXT from "../utils/APPTEXT";
 
-export const Contenido = () => {
+ const Contenido = () => {
   const [openModal, setOpenModal] = useState(false);
   const { locale } = useAppContext();
   const [currentPage, setCurrentPage] = useState(1);
@@ -213,3 +213,4 @@ export const Contenido = () => {
     </div>
   );
 };
+export default Contenido

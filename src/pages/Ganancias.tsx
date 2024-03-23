@@ -26,7 +26,7 @@ interface DataType {
   status: boolean;
 }
 
-export const Ganancias = () => {
+ const Ganancias = () => {
   const { locale } = useAppContext();
   const [openModal, setOpenModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<DataType>({
@@ -473,3 +473,5 @@ export const Ganancias = () => {
     </div>
   );
 };
+
+export default Ganancias

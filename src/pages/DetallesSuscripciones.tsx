@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { CustomModal } from "../componentns/CustomModal/CustomModal";
 import { useState } from "react";
 
-export const DetallesSuscripciones = () => {
+ const DetallesSuscripciones = () => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -220,3 +220,4 @@ export const DetallesSuscripciones = () => {
     </div>
   );
 };
+export default DetallesSuscripciones

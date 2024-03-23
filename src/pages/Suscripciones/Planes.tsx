@@ -6,7 +6,7 @@ import { CustomModal } from "../../componentns/CustomModal/CustomModal";
 import { HeaderPages } from "../../componentns/HeaderPages/HeaderPages";
 import SelectMultiple from "../../componentns/SelectMultiple/SelectMultiple";
 
-export const Planes = () => {
+ const Planes = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openModalPaises, setOpenModalPaises] = useState(false);
 
@@ -257,3 +257,5 @@ export const Planes = () => {
     </div>
   );
 };
+
+export default Planes
