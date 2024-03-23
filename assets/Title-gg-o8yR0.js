@@ -1,0 +1,1 @@
+import{u as s,j as r}from"./index-BpbnlELu.js";const n=({title:t,fontSize:e})=>{const{isDarkMode:o}=s();return r.jsx("h1",{style:{fontSize:e||"38px",color:o?"white":"black"},children:t})};export{n as T};
